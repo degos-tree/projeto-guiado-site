@@ -1,4 +1,4 @@
-*{
+* {
     margin:  0;
     padding: 0;
     outline: 0;
@@ -10,8 +10,85 @@ body {
     background-color: #824EF5;
     color: #F5e61b;
 }
-.lista-menu{
-    color: #F5e61b;
-    text-align: end;
-    text-decoration: none;
+
+li {
+    list-style: none;
 }
+.header-menu {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    padding: 8px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    height: 60px;
+    background-color: #938DF8;
+}
+
+.header-menu nav {
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.header-menu nav {
+    width: 100%;
+    justify-content: flex-end;
+    display: flex;
+}
+
+
+
+.lista-menu {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    list-style: none;
+    align-items: center;
+}
+
+.lista-menu li>a{
+    font-size: 18px;
+    color: #FFF;
+    text-decoration: inherit;
+}
+
+
+.container  {
+    height: 100vh;
+    display: flex;
+}
+
+.subcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.footer {
+    background-color: #5A53D8;
+    display: flex;
+    align-items: center;
+    height: 30vh;
+}
+
+
+
+.lista-footer li{
+    color: #FFF;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;    
+}
+
+
+.estilo-icon {
+    font-size: 22px;
+    margin-right: 10px;
+}
+
+
