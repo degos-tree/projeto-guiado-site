@@ -2,6 +2,7 @@ const podcasts = require("./data/podcasts.json")
 
 const express = require("express")
 const app = express()
+const fs = require('fs');
 
 app.get("/", (request, response)=>{
     response.status(200).send({
