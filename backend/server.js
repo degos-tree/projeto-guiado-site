@@ -1,44 +1,45 @@
-const podcasts = require("./data/podcasts.json")
+const podcasts = require("./data.json");
+const express = require("express");
+const app = express();
 
-const express = require("express")
-const app = express()
-const fs = require('fs');
+//GET - exibe lista com todos os podcasts
 
-app.get("/", (request, response)=>{
-    response.status(200).send({
-        mensagem: "Enviados podcasts com sucesso"
-    })
-});
-
-app.get("/podcasts", (request, response)=>{
+app.get("/todos", (request, response) => {
     response.status(200).send(podcasts)
-});
+})
 
-app.post('/biografias', (request, response) => { // cria novos objetos e dados para salvar na base de dados
-    const { id, nome, profissao, biografia } = request.body;
-    biografias.push//biografia vai receber esses objetos
+// DELETE - apaga podcast por id 
 
-    fs.writeFile("./biografias.json",JSON.stringify(biografias),'utf8', function(err){
+app.delete("/todos/:id", (request, response) => {
+    const idRequest = request.params.id;
+    let podcastFiltrado = podcasts.find(podcast => podcast.id == idRequest);
+    
+    let indice = podcasts.indexOf(podcastFiltrado);
+    podcasts.splice(indice, 1);
+
+    response.status(200).send("podcast deletado");  
+    
+})
+
+// POST - adiciona podcast ao banco de dados
+
+const fs = require("fs");
+app.use(express.json());
+
+app.post("/add", (request, response) => { // cria novos objetos e dados para salvar na base de dados
+    const { id, Titulo, Programa, Descricao, Link } = request.body;
+    podcasts.push({ id, Titulo, Programa, Descricao, Link }); //podcast vai receber esses objetos
+
+    fs.writeFile("./data.json", JSON.stringify(podcasts),'utf8', function(err){
         if(err){
-            return response.status(424).send({mensagem:err});
+            return response.status(424).send({ "mensagem":err });
         }
         console.log("Base de dados atualizada.");
-});
-
-app.delete("/podcasts/:id", (request, response)=>{
-    const idRequest = request.params.id
-    let podcastFiltrado = podcasts.find(podcast => podcast.id == idRequest)
-
-    let indice = podcasts.indexOf(podcastFiltrado)
-    podcasts.splice(indice, 1)
-    
-    response.status(200).send({
-        mensagem: "podcast deletado",
-        podcastFiltrado
-    })
+})
 
 });
 
-app.listen(6060,()=>{
-    console.log("A porta 6060 está ligada")
-})})
+app.listen(6060, () => {
+    console.log("rodando na porta 6060")
+})
+
